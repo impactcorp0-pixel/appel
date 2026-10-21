@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Appel IMPACT Academy</title>
+<style>
+  body { font-family: -apple-system, system-ui, sans-serif; background: #0f172a; color: #fff; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; box-sizing: border-box; }
+  .num { font-size: 20px; opacity: .8; margin-bottom: 20px; letter-spacing: 1px; }
+  a.btn { display: inline-block; background: #22c55e; color: #fff; text-decoration: none; font-size: 26px; font-weight: 700; padding: 18px 40px; border-radius: 14px; }
+  .hint { margin-top: 24px; font-size: 14px; opacity: .6; }
+</style>
+</head>
+<body>
+<div>
+  <div class="num" id="num"></div>
+  <a class="btn" id="btn" href="#">Appeler</a>
+  <div class="hint">Si FaceTime ne s'ouvre pas tout seul, clique sur le bouton.</div>
+</div>
+<script>
+  // Le numero arrive apres le # dans l'adresse : appel.html#0558447094
+  // Le # n'est jamais envoye au serveur, le numero reste dans le navigateur.
+  var n = (document.URL.split("#")[1] || "").replace(/[^0-9+]/g, "");
+  var btn = document.getElementById("btn");
+  document.getElementById("num").textContent = n || "Aucun numero";
+  btn.href = "tel:" + n;
+  // Lancement automatique de l'appel (FaceTime sur Mac, Telephone sur iPhone)
+  if (n) btn.click();
+  // Tente de fermer l'onglet apres le lancement
+  if (n) setTimeout(function () { window.close(); }, 4000);
+</script>
+</body>
+</html>
